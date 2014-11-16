@@ -17,10 +17,10 @@ public abstract class BaseActivity extends ActionBarActivity{
     private ObjectGraph activityScopeGraph;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        injectDependencies();
         super.onCreate(savedInstanceState);
         setContentView(getActivityLayout());
         injectView();
-        injectDependencies();
     }
 
     public abstract int getActivityLayout();
