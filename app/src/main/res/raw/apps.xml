@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<apps>
+    <app>
+        <title>PACA</title>
+        <status>DEVELOPING</status>
+        <icon>epaca</icon>
+    </app>
+</apps>
