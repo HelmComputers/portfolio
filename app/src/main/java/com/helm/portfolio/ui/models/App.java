@@ -14,11 +14,21 @@ public class App {
     String title;
     String icon;
     String status;
-
-    public App(String title, String icon, String status) {
+    String os
+            ;
+    public App(String title, String icon, String status, String os) {
         this.title = title;
         this.icon = icon;
         this.status = status;
+        this.os = os;
+    }
+
+    public String getOs() {
+        return os;
+    }
+
+    public void setOs(String os) {
+        this.os = os;
     }
 
     public String getTitle() {

@@ -56,7 +56,7 @@ public final class AppsXmlParser {
         String title = null;
         String status = null;
         String image = null;
-        App app = null;
+        String os = null;
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
                 continue;
@@ -68,12 +68,16 @@ public final class AppsXmlParser {
                 status = readStatus(parser);
             } else if ("icon".equals(element)) {
                 image = readIcon(parser);
+            } else if ("os".equals(element)){
+                os = readOs(parser);
             } else {
                 skip(parser);
             }
         }
-        return new App(title, image, status);
+        return new App(title, image, status, os);
     }
+
+
 
     private static String readTitle (final XmlPullParser parser) throws IOException, XmlPullParserException {
         return readTag(parser, "title");
@@ -87,7 +91,9 @@ public final class AppsXmlParser {
         return readTag(parser, "icon");
 
     }
-
+    private static String readOs(XmlPullParser parser) throws IOException, XmlPullParserException {
+        return readTag(parser, "os");
+    }
 
     private static String readTag(final XmlPullParser parser, final String tag) throws IOException, XmlPullParserException {
         parser.require(XmlPullParser.START_TAG, null, tag);

@@ -30,14 +30,14 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.ViewHolder> {
         public TextView title;
         public TextView status;
         public ImageView icon;
-
+        public TextView os;
         public ViewHolder(CardView itemView) {
             super(itemView);
 
            title = ((TextView) itemView.findViewById(R.id.app_title));
            status = ((TextView) itemView.findViewById(R.id.app_status)) ;
            icon = ((ImageView) itemView.findViewById(R.id.app_icon));
-
+           os = ((TextView) itemView.findViewById(R.id.app_os));
         }
     }
 
@@ -60,12 +60,13 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.ViewHolder> {
         App app = apps.get(i);
         String title = app.getTitle();
         String status = app.getStatus();
-
+        String os = app.getOs();
         Drawable icon = app.getIcon(cotext);
 
         viewHolder.title.setText(title);
         viewHolder.status.setText(status);
         viewHolder.icon.setImageDrawable(icon);
+        viewHolder.os.setText(os);
     }
 
 

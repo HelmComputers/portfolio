@@ -4,5 +4,6 @@
         <title>PACA</title>
         <status>DEVELOPING</status>
         <icon>epaca</icon>
+        <os>ANDROID</os>
     </app>
 </apps>
