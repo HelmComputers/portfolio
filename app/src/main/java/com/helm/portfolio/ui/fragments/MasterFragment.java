@@ -3,38 +3,38 @@ package com.helm.portfolio.ui.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.helm.portfolio.R;
 import com.helm.portfolio.ui.models.Apps;
+import com.helm.portfolio.ui.presenters.MasterFragmentPresenter;
 import com.helm.portfolio.ui.reciclerview.AppsAdapter;
+import com.helm.portfolio.ui.views.MasterFragmentView;
 import com.helm.portfolio.utils.AppsXmlParser;
 
-public class MasterFragment extends Fragment {
+import javax.inject.Inject;
+
+public class MasterFragment extends BaseFragment implements MasterFragmentView {
 
     @InjectView(R.id.master_fragment_recycler)
     RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+    @Inject
     Context context;
-
+    @Inject
+    MasterFragmentPresenter masterFragmentPresenter;
     public MasterFragment() {
         // Required empty public constructor
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        context = getActivity().getApplicationContext();
-        View v = inflater.inflate(R.layout.fragment_master, container, false);
-        ButterKnife.inject(this, v);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        masterFragmentPresenter.setView(this);
         recyclerView.setHasFixedSize(true);
 
         layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
@@ -42,8 +42,14 @@ public class MasterFragment extends Fragment {
         Apps apps = getApps();
         adapter = new AppsAdapter(apps.asList(), context);
         recyclerView.setAdapter(adapter);
-        return v;
     }
+
+    @Override
+    public int getFragmentLayout() {
+        return R.layout.fragment_master;
+    }
+
+
 
     private Apps getApps() {
         Apps apps = new Apps();

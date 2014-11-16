@@ -3,18 +3,16 @@ package com.helm.portfolio.ui.activities;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
-import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.helm.portfolio.R;
 import com.helm.portfolio.ui.fragments.MasterFragment;
 
 
-public class MasterActivity extends ActionBarActivity {
+public class MasterActivity extends BaseActivity {
 
     public static String MASTER_FRAGMENT_TAG = "MASTER_FRAGMENT";
 
@@ -26,12 +24,14 @@ public class MasterActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_master);
-        ButterKnife.inject(this);
         setSupportActionBar(toolbar);
         setUpMasterFragment();
     }
 
+    @Override
+    public int getActivityLayout() {
+        return R.layout.activity_master;
+    }
 
 
     private void setUpMasterFragment() {
@@ -39,7 +39,7 @@ public class MasterActivity extends ActionBarActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         MasterFragment masterFragment = new MasterFragment();
-        fragmentTransaction.replace(frameLayout.getId(),masterFragment, MASTER_FRAGMENT_TAG);
+        fragmentTransaction.replace(frameLayout.getId(), masterFragment, MASTER_FRAGMENT_TAG);
         fragmentTransaction.commit();
 
     }

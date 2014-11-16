@@ -9,6 +9,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +24,9 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.ViewHolder> {
 
 
     private final List<App> apps;
-    private final Context cotext;
+    private static Context context;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView title;
         public TextView status;
@@ -33,17 +34,22 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.ViewHolder> {
         public TextView os;
         public ViewHolder(CardView itemView) {
             super(itemView);
-
+           itemView.setOnClickListener(this);
            title = ((TextView) itemView.findViewById(R.id.app_title));
            status = ((TextView) itemView.findViewById(R.id.app_status)) ;
            icon = ((ImageView) itemView.findViewById(R.id.app_icon));
            os = ((TextView) itemView.findViewById(R.id.app_os));
         }
+
+        @Override
+        public void onClick(View v) {
+            Log.d("clicked", "onClick " + getPosition());
+        }
     }
 
     public AppsAdapter(List<App> apps, Context cotext){
         this.apps = apps;
-        this.cotext = cotext;
+        this.context = cotext;
     }
 
     @Override
@@ -61,7 +67,7 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.ViewHolder> {
         String title = app.getTitle();
         String status = app.getStatus();
         String os = app.getOs();
-        Drawable icon = app.getIcon(cotext);
+        Drawable icon = app.getIcon(context);
 
         viewHolder.title.setText(title);
         viewHolder.status.setText(status);
