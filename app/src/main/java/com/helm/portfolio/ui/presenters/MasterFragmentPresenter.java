@@ -8,9 +8,12 @@ package com.helm.portfolio.ui.presenters;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
 import com.helm.portfolio.R;
 import com.helm.portfolio.ui.models.Apps;
 import com.helm.portfolio.ui.reciclerview.AppsAdapter;
+import com.helm.portfolio.ui.reciclerview.RecyclerItemClickListener;
 import com.helm.portfolio.ui.views.MasterFragmentView;
 import com.helm.portfolio.utils.AppsXmlParser;
 
@@ -39,6 +42,14 @@ public class MasterFragmentPresenter {
         Apps apps = getApps();
         adapter = new AppsAdapter(apps.asList(), context);
         recyclerView.setAdapter(adapter);
+
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override public void onItemClick(View view, int position) {
+                        Log.e("Click", "clicked item nº "+position);
+                    }
+                })
+        );
     }
 
 
