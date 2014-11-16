@@ -1,9 +1,10 @@
 package com.helm.portfolio.ui.activities;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
@@ -13,20 +14,25 @@ import com.helm.portfolio.R;
 import com.helm.portfolio.ui.fragments.MasterFragment;
 
 
-public class MasterActivity extends FragmentActivity {
+public class MasterActivity extends ActionBarActivity {
 
     public static String MASTER_FRAGMENT_TAG = "MASTER_FRAGMENT";
 
     @InjectView(R.id.master_activity_master_container)
     FrameLayout frameLayout;
+    @InjectView(R.id.toolbar)
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_master);
         ButterKnife.inject(this);
+        setSupportActionBar(toolbar);
         setUpMasterFragment();
     }
+
+
 
     private void setUpMasterFragment() {
 
