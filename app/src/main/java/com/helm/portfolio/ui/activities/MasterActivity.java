@@ -39,7 +39,7 @@ public class MasterActivity extends ActionBarActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         MasterFragment masterFragment = new MasterFragment();
-        fragmentTransaction.add(frameLayout.getId(),masterFragment, MASTER_FRAGMENT_TAG);
+        fragmentTransaction.replace(frameLayout.getId(),masterFragment, MASTER_FRAGMENT_TAG);
         fragmentTransaction.commit();
 
     }

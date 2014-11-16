@@ -1,9 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <apps>
     <app>
-        <title>PACA</title>
-        <status>DEVELOPING</status>
+        <title>Guixa</title>
+        <status>Developing v3.0</status>
         <icon>epaca</icon>
-        <os>ANDROID</os>
+        <os>iOS</os>
     </app>
+    <app>
+        <title>Microblog</title>
+        <status>Released</status>
+        <icon>epaca</icon>
+        <os>Android</os>
+    </app>
+    <app>
+        <title>iPac Consultor</title>
+        <status>Developing </status>
+        <icon>epaca</icon>
+        <os>iOS</os>
+    </app>
+    <app>
+        <title>aPac Consultor</title>
+        <status>Developing v2.0</status>
+        <icon>epaca</icon>
+        <os>Android</os>
+    </app>
+    <app>
+        <title>aPac Estudiant</title>
+        <status>Developing</status>
+        <icon>epaca</icon>
+        <os>Android</os>
+    </app>
+    <app>
+        <title>iPac Estudiant</title>
+        <status>Developing</status>
+        <icon>epaca</icon>
+        <os>iOS</os>
+    </app>
+    <app>
+        <title>Materials</title>
+        <status>Developing</status>
+        <icon>epaca</icon>
+        <os>Android</os>
+    </app>
+    <app>
+        <title>Materials</title>
+        <status>Developing</status>
+        <icon>epaca</icon>
+        <os>iOS</os>
+    </app>
+    <app>
+        <title>Video annotation tool</title>
+        <status>Developing</status>
+        <icon>epaca</icon>
+        <os>iOS</os>
+    </app>
+    <app>
+        <title>Guixa</title>
+        <status>Developing</status>
+        <icon>epaca</icon>
+        <os>Android</os>
+    </app>
+
 </apps>
