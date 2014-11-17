@@ -18,4 +18,5 @@
                 android:id="@+id/master_activity_master_container">
 
     </FrameLayout>
+
 </LinearLayout>

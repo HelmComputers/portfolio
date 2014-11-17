@@ -2,11 +2,14 @@ package com.helm.portfolio.ui.fragments;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import butterknife.InjectView;
+import butterknife.OnClick;
 import com.helm.portfolio.R;
 import com.helm.portfolio.ui.presenters.MasterFragmentPresenter;
 import com.helm.portfolio.ui.views.MasterFragmentView;
@@ -17,8 +20,6 @@ public class MasterFragment extends BaseFragment implements MasterFragmentView {
 
     @InjectView(R.id.master_fragment_recycler)
     RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
     @Inject
     Context context;
     @Inject
@@ -34,7 +35,6 @@ public class MasterFragment extends BaseFragment implements MasterFragmentView {
         masterFragmentPresenter.setView(this);
         masterFragmentPresenter.initialize(recyclerView);
 
-
     }
 
     @Override
@@ -43,6 +43,14 @@ public class MasterFragment extends BaseFragment implements MasterFragmentView {
     }
 
 
+    @OnClick(R.id.fab) public void onClickFab() {
 
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setType("message/rfc822");
+        Uri uri = Uri.parse(getString(R.string.helm_mail));
+        intent.setData(uri);
+
+        startActivity(intent);
+    }
 
 }
