@@ -8,7 +8,6 @@ package com.helm.portfolio.ui.presenters;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import com.helm.portfolio.R;
 import com.helm.portfolio.ui.models.Apps;
@@ -22,7 +21,7 @@ import javax.inject.Inject;
 public class MasterFragmentPresenter {
 
     private final Context context;
-    public MasterFragmentView view;
+    public  MasterFragmentView view;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
@@ -46,14 +45,16 @@ public class MasterFragmentPresenter {
         recyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(context, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
-                        Log.e("Click", "clicked item nº "+position);
+                        onListItemClicked(position);
                     }
                 })
         );
     }
 
 
-
+    public void onListItemClicked(int position){
+        view.onListItemClicked(position);
+    };
 
     private Apps getApps() {
         Apps apps = new Apps();
