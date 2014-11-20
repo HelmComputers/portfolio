@@ -2,13 +2,15 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
              tools:context="com.helm.portfolio.ui.fragments.DetailsFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-            android:id="@+id/fragment_details_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment"/>
+   <org.lucasr.twowayview.widget.TwoWayView
+           android:layout_width="match_parent"
+           android:layout_height="200dp"
+           android:id="@+id/details_fragment_rv"
+           app:twowayview_layoutManager="ListLayoutManager"
+           />
 
 </FrameLayout>
