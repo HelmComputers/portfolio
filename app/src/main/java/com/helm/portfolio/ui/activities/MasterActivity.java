@@ -14,6 +14,7 @@ import com.helm.portfolio.R;
 import com.helm.portfolio.ui.fragments.BaseFragment;
 import com.helm.portfolio.ui.fragments.DetailsFragment;
 import com.helm.portfolio.ui.fragments.MasterFragment;
+import com.helm.portfolio.ui.models.App;
 
 
 public class MasterActivity extends BaseActivity implements MasterFragment.Callback{
@@ -45,9 +46,9 @@ public class MasterActivity extends BaseActivity implements MasterFragment.Callb
 
         MasterFragment masterFragment = new MasterFragment();
         setUpFragment( frameLayoutMaster.getId(),masterFragment, MASTER_FRAGMENT_TAG);
-
         if (frameLayoutDetails != null) {
-            DetailsFragment detailsFragment = DetailsFragment.newInstance(0);
+            App dejfaultApp = masterFragment.getDefaultApp();
+            DetailsFragment detailsFragment = DetailsFragment.newInstance(0,dejfaultApp);
             setUpFragment(frameLayoutDetails.getId(), detailsFragment, DETAILS_FRAGMENT_TAG);
         }
     }
@@ -77,19 +78,21 @@ public class MasterActivity extends BaseActivity implements MasterFragment.Callb
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(containerId, fragment, tag);
         fragmentTransaction.commit();
+        fragmentManager.executePendingTransactions();
     }
 
     @Override
-    public void onListItemClicked(int item) {
+    public void onListItemClicked(int item, App app) {
         if (frameLayoutDetails == null) {
             Intent i = new Intent(this, DetailsActivity.class);
             i.putExtra(DetailsFragment.DETAILS_POSITION, item);
+            i.putExtra(DetailsFragment.DETAILS_APP, app);
             startActivity(i);
         }else{
             DetailsFragment detailsFragment = (DetailsFragment) getSupportFragmentManager().
                     findFragmentByTag(DETAILS_FRAGMENT_TAG);
             if (detailsFragment == null || detailsFragment.getShownIndex() != item) {
-                DetailsFragment newDetailsFragment = DetailsFragment.newInstance(item);
+                DetailsFragment newDetailsFragment = DetailsFragment.newInstance(item, app);
                 setUpFragment(frameLayoutDetails.getId(), newDetailsFragment, DETAILS_FRAGMENT_TAG);
             }
         }

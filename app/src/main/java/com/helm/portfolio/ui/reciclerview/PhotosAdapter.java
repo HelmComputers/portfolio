@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import com.helm.portfolio.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.ViewHolder> {
@@ -23,15 +22,10 @@ public class PhotosAdapter extends RecyclerView.Adapter<PhotosAdapter.ViewHolder
     private final Context context;
     private final List<Drawable> photos;
 
-    public PhotosAdapter( Context context) {
+    public PhotosAdapter(List<Drawable> photos, Context context) {
 
         this.context = context;
-        photos = new ArrayList<Drawable>();
-        photos.add(context.getResources().getDrawable(R.drawable.microblog_android_1_portrait));
-        photos.add(context.getResources().getDrawable(R.drawable.microblog_android_1_portrait));
-        photos.add(context.getResources().getDrawable(R.drawable.microblog_android_3_portrait));
-        photos.add(context.getResources().getDrawable(R.drawable.microblog_android_4_portrait));
-
+        this.photos = photos;
 
     }
 

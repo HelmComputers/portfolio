@@ -3,11 +3,14 @@ package com.helm.portfolio.ui.fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import butterknife.InjectView;
 import com.helm.portfolio.R;
+import com.helm.portfolio.ui.models.App;
 import com.helm.portfolio.ui.presenters.DetailsFragmentPresenter;
 import com.helm.portfolio.ui.reciclerview.PhotosAdapter;
 import com.helm.portfolio.ui.views.DetailsFragmentView;
@@ -15,11 +18,14 @@ import org.lucasr.twowayview.TwoWayLayoutManager;
 import org.lucasr.twowayview.widget.TwoWayView;
 
 import javax.inject.Inject;
+import java.util.List;
 
 
 public class DetailsFragment extends BaseFragment implements DetailsFragmentView{
 
     public static String DETAILS_POSITION = "DETAILS_POSITION";
+    public static String DETAILS_APP = "DETAILS_APP";
+
     @InjectView(R.id.details_fragment_rv)
     TwoWayView recyclerView;
     @Inject
@@ -27,10 +33,21 @@ public class DetailsFragment extends BaseFragment implements DetailsFragmentView
     @Inject
     Context context;
 
-    public static DetailsFragment newInstance(int position){
+
+    @InjectView(R.id.app_title)
+    TextView title;
+    @InjectView(R.id.app_status)
+    TextView status;
+    @InjectView(R.id.app_os)
+    TextView os;
+    @InjectView(R.id.fragment_details_description)
+    TextView description;
+
+    public static DetailsFragment newInstance(int position, App app){
         DetailsFragment detailsFragment = new DetailsFragment();
         Bundle arguments = new Bundle();
         arguments.putInt(DETAILS_POSITION, position);
+        arguments.putSerializable(DETAILS_APP, app);
         detailsFragment.setArguments(arguments);
         return detailsFragment;
     }
@@ -47,17 +64,25 @@ public class DetailsFragment extends BaseFragment implements DetailsFragmentView
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.i("Details Fragment:", String.valueOf(getShownIndex()));
-
-        detailsFragmentPresenter.setView(this);
-        initializeRecyclerView();
+        App app = getShownApp();
+        setupApp(app);
     }
 
-    private void initializeRecyclerView() {
+    private void setupApp(App app) {
+        status.setText(app.getStatus());
+        title.setText(app.getTitle());
+        os.setText(app.getOs());
+        description.setText(app.getDescription());
+        initializeRecyclerView(app.getPhotos(context));
+
+    }
+
+    private void initializeRecyclerView(List<Drawable> photos) {
 
         recyclerView.setHasFixedSize(true);
         //ItemClickSupport itemClickSupport = ItemClickSupport.addTo(recyclerView);
 
-        recyclerView.setAdapter(new PhotosAdapter(context));
+        recyclerView.setAdapter(new PhotosAdapter(photos, context));
         recyclerView.setOrientation(TwoWayLayoutManager.Orientation.HORIZONTAL);
     }
 
@@ -69,6 +94,10 @@ public class DetailsFragment extends BaseFragment implements DetailsFragmentView
 
     public int getShownIndex() {
         return getArguments().getInt(DETAILS_POSITION);
+    }
+
+    public App getShownApp(){
+        return ((App) getArguments().getSerializable(DETAILS_APP));
     }
 
 

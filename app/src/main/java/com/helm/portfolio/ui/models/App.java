@@ -9,18 +9,26 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 
-public class App {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+public class App implements Serializable {
+
+    private final List<String> photos;
+    private final String description;
     String title;
     String icon;
     String status;
-    String os
-            ;
-    public App(String title, String icon, String status, String os) {
+    String os;
+
+    public App(String title, String icon, String status,String os, List<String> photos,String description) {
         this.title = title;
         this.icon = icon;
         this.status = status;
         this.os = os;
+        this.photos = photos;
+        this.description = description;
     }
 
     public String getOs() {
@@ -54,7 +62,17 @@ public class App {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public List<Drawable> getPhotos(Context context){
+        Resources resources  = context.getResources();
+        List<Drawable> imageDrawable = new ArrayList<Drawable>();
+        for (String photo : photos) {
+            final int resourceId = resources.getIdentifier(photo, "drawable", context.getPackageName());
+            imageDrawable.add(resources.getDrawable(resourceId));
+        }
+        return imageDrawable;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

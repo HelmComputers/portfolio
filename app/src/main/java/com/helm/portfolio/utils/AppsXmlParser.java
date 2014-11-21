@@ -5,6 +5,7 @@ Created by Helm  16/11/14.
 
 package com.helm.portfolio.utils;
 
+import android.util.Log;
 import android.util.Xml;
 import com.helm.portfolio.ui.models.App;
 import com.helm.portfolio.ui.models.Apps;
@@ -13,6 +14,8 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class AppsXmlParser {
 
@@ -57,7 +60,10 @@ public final class AppsXmlParser {
         String status = null;
         String image = null;
         String os = null;
+        List<String> photos = null;
+        String description = null;
         while (parser.next() != XmlPullParser.END_TAG) {
+            Log.e("wtf", String.valueOf(parser.getEventType()));
             if (parser.getEventType() != XmlPullParser.START_TAG) {
                 continue;
             }
@@ -68,15 +74,40 @@ public final class AppsXmlParser {
                 status = readStatus(parser);
             } else if ("icon".equals(element)) {
                 image = readIcon(parser);
-            } else if ("os".equals(element)){
+            } else if ("os".equals(element)) {
                 os = readOs(parser);
+            } else if("photos".equals(element)) {
+                photos = readPhotos(parser);
+            } else if("description".equals(element)){
+                description = readDescription(parser);
             } else {
                 skip(parser);
             }
         }
-        return new App(title, image, status, os);
+        return new App(title, image, status, os, photos, description);
     }
 
+
+    private static List<String> readPhotos(XmlPullParser parser) throws IOException, XmlPullParserException {
+        List<String> photos = new ArrayList<String>();
+        parser.require(XmlPullParser.START_TAG, null, "photos");
+        while (parser.next() != XmlPullParser.END_TAG) {
+            if (parser.getEventType() != XmlPullParser.START_TAG) {
+                continue;
+            }
+            final String name = parser.getName();
+            if ("photo".equals(name)) {
+               photos.add(readPhoto(parser));
+            } else {
+                skip(parser);
+            }
+        }
+        return photos;
+    }
+
+    private static String readPhoto(XmlPullParser parser) throws IOException, XmlPullParserException {
+        return readTag(parser, "photo");
+    }
 
 
     private static String readTitle (final XmlPullParser parser) throws IOException, XmlPullParserException {
@@ -85,6 +116,10 @@ public final class AppsXmlParser {
 
     private static String readStatus(final XmlPullParser parser) throws IOException, XmlPullParserException {
         return readTag(parser, "status");
+    }
+
+    private static String readDescription(final XmlPullParser parser) throws IOException, XmlPullParserException {
+        return readTag(parser, "description");
     }
 
     private static String readIcon(final XmlPullParser parser) throws IOException, XmlPullParserException {
