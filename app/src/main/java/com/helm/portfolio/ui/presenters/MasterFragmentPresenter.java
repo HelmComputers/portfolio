@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import com.helm.portfolio.R;
+import com.helm.portfolio.ui.models.App;
 import com.helm.portfolio.ui.models.Apps;
 import com.helm.portfolio.ui.reciclerview.AppsAdapter;
 import com.helm.portfolio.ui.reciclerview.RecyclerItemClickListener;
@@ -24,6 +25,7 @@ public class MasterFragmentPresenter {
     public  MasterFragmentView view;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+    private Apps apps;
 
     @Inject
     public MasterFragmentPresenter(Context context){
@@ -53,11 +55,11 @@ public class MasterFragmentPresenter {
 
 
     public void onListItemClicked(int position){
-        view.onListItemClicked(position);
+        view.onListItemClicked(position, apps.asList().get(position));
     };
 
     private Apps getApps() {
-        Apps apps = new Apps();
+        apps = new Apps();
         try {
             apps  = AppsXmlParser.parse(context.getResources().openRawResource(R.raw.apps));
         } catch (Exception e) {
@@ -67,4 +69,7 @@ public class MasterFragmentPresenter {
 
     }
 
+    public App getDefaultApp() {
+        return getApps().asList().get(1);
+    }
 }

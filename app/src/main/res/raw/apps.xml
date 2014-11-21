@@ -11,6 +11,17 @@
         <status>Released</status>
         <icon>epaca</icon>
         <os>Android</os>
+        <photos>
+            <photo>microblog_android_1_portrait</photo>
+            <photo>microblog_android_1_portrait</photo>
+            <photo>microblog_android_3_portrait</photo>
+            <photo>microblog_android_3_portrait</photo>
+            <photo>microblog_android_4_portrait</photo>
+            <photo>microblog_android_4_portrait</photo>
+        </photos>
+        <description>
+            El Microblog consisteix en una eina de comunicació interna pels estudiants de la UOC, basada en Microblogging. Aquesta comparteix diverses característiques amb Twitter, com la possibilitat de referenciar als altres usuaris i la presència de Hashtags.
+        </description>
     </app>
     <app>
         <title>iPac Consultor</title>

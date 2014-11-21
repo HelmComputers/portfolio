@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentTransaction;
 import com.helm.portfolio.R;
 import com.helm.portfolio.ui.fragments.BaseFragment;
 import com.helm.portfolio.ui.fragments.DetailsFragment;
+import com.helm.portfolio.ui.models.App;
 
 public class DetailsActivity extends BaseActivity{
 
@@ -26,7 +27,8 @@ public class DetailsActivity extends BaseActivity{
         }
         if(savedInstanceState == null) {
             int position = getIntent().getExtras().getInt(DetailsFragment.DETAILS_POSITION);
-            DetailsFragment detailsFragment = DetailsFragment.newInstance(position);
+            App app = ((App) getIntent().getExtras().getSerializable(DetailsFragment.DETAILS_APP));
+            DetailsFragment detailsFragment = DetailsFragment.newInstance(position, app);
             setUpFragment(R.id.details_container, detailsFragment, MasterActivity.DETAILS_FRAGMENT_TAG);
         }
     }

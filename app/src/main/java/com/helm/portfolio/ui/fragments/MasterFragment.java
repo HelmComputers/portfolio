@@ -11,6 +11,7 @@ import android.view.View;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import com.helm.portfolio.R;
+import com.helm.portfolio.ui.models.App;
 import com.helm.portfolio.ui.presenters.MasterFragmentPresenter;
 import com.helm.portfolio.ui.views.MasterFragmentView;
 
@@ -66,14 +67,18 @@ public class MasterFragment extends BaseFragment implements MasterFragmentView {
     }
 
     @Override
-    public void onListItemClicked(int position) {
-        callback.onListItemClicked(position);
+    public void onListItemClicked(int position, App app) {
+        callback.onListItemClicked(position, app);
+    }
+
+    public App getDefaultApp() {
+        return masterFragmentPresenter.getDefaultApp();
     }
 
 
     public interface Callback{
 
-        public void onListItemClicked(int item);
+        public void onListItemClicked(int item, App app);
 
     }
 
