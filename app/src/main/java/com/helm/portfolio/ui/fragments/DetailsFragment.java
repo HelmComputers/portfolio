@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -14,6 +15,8 @@ import com.helm.portfolio.ui.models.App;
 import com.helm.portfolio.ui.presenters.DetailsFragmentPresenter;
 import com.helm.portfolio.ui.reciclerview.PhotosAdapter;
 import com.helm.portfolio.ui.views.DetailsFragmentView;
+import org.lucasr.twowayview.ItemClickSupport;
+import org.lucasr.twowayview.ItemSelectionSupport;
 import org.lucasr.twowayview.TwoWayLayoutManager;
 import org.lucasr.twowayview.widget.TwoWayView;
 
@@ -80,10 +83,23 @@ public class DetailsFragment extends BaseFragment implements DetailsFragmentView
     private void initializeRecyclerView(List<Drawable> photos) {
 
         recyclerView.setHasFixedSize(true);
-        //ItemClickSupport itemClickSupport = ItemClickSupport.addTo(recyclerView);
+        ItemClickSupport itemClickSupport = ItemClickSupport.addTo(recyclerView);
 
         recyclerView.setAdapter(new PhotosAdapter(photos, context));
         recyclerView.setOrientation(TwoWayLayoutManager.Orientation.HORIZONTAL);
+        final ItemSelectionSupport itemSelection = ItemSelectionSupport.addTo(recyclerView);
+        itemSelection.setChoiceMode(ItemSelectionSupport.ChoiceMode.MULTIPLE);
+        itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView recyclerView, View view, int i, long l) {
+
+                itemSelection.setItemChecked(i, true);
+                Log.e("Click", ""+i);
+
+            }
+        });
+        itemSelection.setItemChecked(2, true);
+
     }
 
     @Override
