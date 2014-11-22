@@ -1,5 +1,6 @@
 package com.helm.portfolio.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -8,19 +9,26 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 import butterknife.InjectView;
+import butterknife.Optional;
 import com.helm.portfolio.R;
+import com.helm.portfolio.ui.fragments.BaseFragment;
+import com.helm.portfolio.ui.fragments.DetailsFragment;
 import com.helm.portfolio.ui.fragments.MasterFragment;
+import com.helm.portfolio.ui.models.App;
 
 
-public class MasterActivity extends BaseActivity {
+public class MasterActivity extends BaseActivity implements MasterFragment.Callback{
 
     public static String MASTER_FRAGMENT_TAG = "MASTER_FRAGMENT";
+    public static String DETAILS_FRAGMENT_TAG = "DETAILS_FRAGMENT";
 
     @InjectView(R.id.master_activity_master_container)
-    FrameLayout frameLayout;
+    FrameLayout frameLayoutMaster;
     @InjectView(R.id.toolbar)
     Toolbar toolbar;
-
+    @Optional
+    @InjectView(R.id.details_container)
+    FrameLayout frameLayoutDetails;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,12 +44,13 @@ public class MasterActivity extends BaseActivity {
 
     private void setUpMasterFragment() {
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         MasterFragment masterFragment = new MasterFragment();
-        fragmentTransaction.replace(frameLayout.getId(), masterFragment, MASTER_FRAGMENT_TAG);
-        fragmentTransaction.commit();
-
+        setUpFragment( frameLayoutMaster.getId(),masterFragment, MASTER_FRAGMENT_TAG);
+        if (frameLayoutDetails != null) {
+            App dejfaultApp = masterFragment.getDefaultApp();
+            DetailsFragment detailsFragment = DetailsFragment.newInstance(0,dejfaultApp);
+            setUpFragment(frameLayoutDetails.getId(), detailsFragment, DETAILS_FRAGMENT_TAG);
+        }
     }
 
 
@@ -61,5 +70,31 @@ public class MasterActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public void setUpFragment(int containerId, BaseFragment fragment, String tag ){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(containerId, fragment, tag);
+        fragmentTransaction.commit();
+        fragmentManager.executePendingTransactions();
+    }
+
+    @Override
+    public void onListItemClicked(int item, App app) {
+        if (frameLayoutDetails == null) {
+            Intent i = new Intent(this, DetailsActivity.class);
+            i.putExtra(DetailsFragment.DETAILS_POSITION, item);
+            i.putExtra(DetailsFragment.DETAILS_APP, app);
+            startActivity(i);
+        }else{
+            DetailsFragment detailsFragment = (DetailsFragment) getSupportFragmentManager().
+                    findFragmentByTag(DETAILS_FRAGMENT_TAG);
+            if (detailsFragment == null || detailsFragment.getShownIndex() != item) {
+                DetailsFragment newDetailsFragment = DetailsFragment.newInstance(item, app);
+                setUpFragment(frameLayoutDetails.getId(), newDetailsFragment, DETAILS_FRAGMENT_TAG);
+            }
+        }
     }
 }

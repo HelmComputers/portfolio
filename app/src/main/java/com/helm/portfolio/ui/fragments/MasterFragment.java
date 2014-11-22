@@ -1,7 +1,7 @@
 package com.helm.portfolio.ui.fragments;
 
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.view.View;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import com.helm.portfolio.R;
+import com.helm.portfolio.ui.models.App;
 import com.helm.portfolio.ui.presenters.MasterFragmentPresenter;
 import com.helm.portfolio.ui.views.MasterFragmentView;
 
@@ -18,15 +19,27 @@ import javax.inject.Inject;
 
 public class MasterFragment extends BaseFragment implements MasterFragmentView {
 
+
     @InjectView(R.id.master_fragment_recycler)
     RecyclerView recyclerView;
-    @Inject
-    Context context;
+
     @Inject
     MasterFragmentPresenter masterFragmentPresenter;
 
+    public Callback callback;
+
     public MasterFragment() {
         // Required empty public constructor
+    }
+
+
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if(activity instanceof Callback){
+            callback = ((Callback) activity);
+        }
     }
 
     @Override
@@ -51,6 +64,22 @@ public class MasterFragment extends BaseFragment implements MasterFragmentView {
         intent.setData(uri);
 
         startActivity(intent);
+    }
+
+    @Override
+    public void onListItemClicked(int position, App app) {
+        callback.onListItemClicked(position, app);
+    }
+
+    public App getDefaultApp() {
+        return masterFragmentPresenter.getDefaultApp();
+    }
+
+
+    public interface Callback{
+
+        public void onListItemClicked(int item, App app);
+
     }
 
 }

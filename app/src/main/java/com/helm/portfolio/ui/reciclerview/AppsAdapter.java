@@ -9,6 +9,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,8 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.ViewHolder> {
 
 
     private final List<App> apps;
-    private static Context context;
+    private Context context;
+    private SparseBooleanArray selectedItems;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -43,16 +45,16 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.ViewHolder> {
 
     }
 
-    public AppsAdapter(List<App> apps, Context cotext){
+    public AppsAdapter(List<App> apps, Context context){
         this.apps = apps;
-        this.context = cotext;
+        this.context = context;
+        selectedItems = new SparseBooleanArray();
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.master_fragment_rv_item, null);
-
         return new ViewHolder(((CardView) v));
     }
 
@@ -69,6 +71,7 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.ViewHolder> {
         viewHolder.status.setText(status);
         viewHolder.icon.setImageDrawable(icon);
         viewHolder.os.setText(os);
+        viewHolder.itemView.setActivated(selectedItems.get(i,false));
     }
 
 
