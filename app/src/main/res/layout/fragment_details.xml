@@ -8,7 +8,7 @@
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
     <include layout="@layout/master_fragment_rv_item" android:id="@+id/specs"/>
    <org.lucasr.twowayview.widget.TwoWayView
            android:layout_width="match_parent"
