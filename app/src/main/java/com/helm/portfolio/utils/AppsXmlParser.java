@@ -5,7 +5,6 @@ Created by Helm  16/11/14.
 
 package com.helm.portfolio.utils;
 
-import android.util.Log;
 import android.util.Xml;
 import com.helm.portfolio.ui.models.App;
 import com.helm.portfolio.ui.models.Apps;
@@ -63,7 +62,6 @@ public final class AppsXmlParser {
         List<String> photos = null;
         String description = null;
         while (parser.next() != XmlPullParser.END_TAG) {
-            Log.e("wtf", String.valueOf(parser.getEventType()));
             if (parser.getEventType() != XmlPullParser.START_TAG) {
                 continue;
             }

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.helm.portfolio" >
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:name=".HelmApplication"
@@ -18,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activities.DetailsActivity"/>
+        <meta-data android:name="com.crashlytics.ApiKey" android:value="a8f68d48bd8868fbd4d197c4d4343d77dc4c1a20"/>
     </application>
 
 </manifest>

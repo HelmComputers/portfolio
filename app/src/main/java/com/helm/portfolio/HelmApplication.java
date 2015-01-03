@@ -6,8 +6,10 @@ Created by Helm  16/11/14.
 package com.helm.portfolio;
 
 import android.app.Application;
+import com.crashlytics.android.Crashlytics;
 import com.helm.portfolio.dependencyinjection.RootModule;
 import dagger.ObjectGraph;
+import io.fabric.sdk.android.Fabric;
 
 public class HelmApplication extends Application{
 
@@ -17,6 +19,7 @@ public class HelmApplication extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
         initializeDependencyInjector();
     }
 
