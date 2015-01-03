@@ -41,8 +41,6 @@ public class DetailsFragment extends BaseFragment implements DetailsFragmentView
     TextView title;
     @InjectView(R.id.app_status)
     TextView status;
-    @InjectView(R.id.app_os)
-    TextView os;
     @InjectView(R.id.fragment_details_description)
     TextView description;
 
@@ -72,9 +70,8 @@ public class DetailsFragment extends BaseFragment implements DetailsFragmentView
     }
 
     private void setupApp(App app) {
-        status.setText(app.getStatus());
+        status.setText(app.getOs()+" "+app.getStatus());
         title.setText(app.getTitle());
-        os.setText(app.getOs());
         description.setText(app.getDescription());
         initializeRecyclerView(app.getPhotos(context));
 
