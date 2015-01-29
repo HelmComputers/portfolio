@@ -28,7 +28,6 @@ proguard/
 .gradle/
 #AÃ±adido a mano
 gradle/
-gradle*
 out
 
 # Eclipse
