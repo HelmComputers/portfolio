@@ -7,7 +7,6 @@ package com.helm.portfolio.ui.reciclerview;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -52,8 +51,8 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.ViewHolder> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.master_fragment_rv_item, null);
+        final View v = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.master_fragment_rv_item, viewGroup,false);
         return new ViewHolder(((RelativeLayout) v));
     }
 

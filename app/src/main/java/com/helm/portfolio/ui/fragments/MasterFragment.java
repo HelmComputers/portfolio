@@ -2,7 +2,9 @@ package com.helm.portfolio.ui.fragments;
 
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,8 +14,14 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import com.helm.portfolio.R;
 import com.helm.portfolio.ui.models.App;
+import com.helm.portfolio.ui.models.Apps;
 import com.helm.portfolio.ui.presenters.MasterFragmentPresenter;
+import com.helm.portfolio.ui.reciclerview.AppsAdapter;
 import com.helm.portfolio.ui.views.MasterFragmentView;
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
+import org.lucasr.twowayview.ItemClickSupport;
+import org.lucasr.twowayview.widget.DividerItemDecoration;
 
 import javax.inject.Inject;
 
@@ -46,8 +54,31 @@ public class MasterFragment extends BaseFragment implements MasterFragmentView {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         masterFragmentPresenter.setView(this);
-        masterFragmentPresenter.initialize(recyclerView);
+        masterFragmentPresenter.initialize();
 
+    }
+
+    @Override
+    public void initializeRecyclerView(Apps apps) {
+
+        recyclerView.setHasFixedSize(true);
+        AppsAdapter adapter = new AppsAdapter(apps.asList(), getActivity());
+        recyclerView.setAdapter(adapter);
+
+     //   final ItemSelectionSupport itemSelectionSupport = ItemSelectionSupport.addTo(recyclerView);
+       // itemSelectionSupport.setChoiceMode(ItemSelectionSupport.ChoiceMode.SINGLE);
+      //  itemSelectionSupport.
+
+        final Drawable divider = getActivity().getResources().getDrawable(R.drawable.list_divider);
+        recyclerView.addItemDecoration(new DividerItemDecoration(divider));
+        final ItemClickSupport itemClickSupport = ItemClickSupport.addTo(recyclerView);
+
+        itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView recyclerView, final View view, int i, long l) {
+                masterFragmentPresenter.onListItemClicked(i);
+            }
+        });
     }
 
     @Override
@@ -57,13 +88,15 @@ public class MasterFragment extends BaseFragment implements MasterFragmentView {
 
 
     @OnClick(R.id.fab) public void onClickFab() {
-
-        Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setType("message/rfc822");
-        Uri uri = Uri.parse(getString(R.string.helm_mail));
-        intent.setData(uri);
-
-        startActivity(intent);
+        try {
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setType("message/rfc822");
+            Uri uri = Uri.parse(getString(R.string.helm_mail));
+            intent.setData(uri);
+            startActivity(intent);
+        }catch (ActivityNotFoundException e){
+            Crouton.makeText(getActivity(),getString(R.string.app_not_found), Style.ALERT).show();
+        }
     }
 
     @Override

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import com.helm.portfolio.ui.activities.BaseActivity;
+import de.keyboardsurfer.android.widget.crouton.Crouton;
 
 public abstract class BaseFragment extends Fragment {
 
@@ -32,4 +33,9 @@ public abstract class BaseFragment extends Fragment {
     }
     public abstract int getFragmentLayout();
 
+    @Override
+    public void onDestroy() {
+        Crouton.cancelAllCroutons();
+        super.onDestroy();
+    }
 }
