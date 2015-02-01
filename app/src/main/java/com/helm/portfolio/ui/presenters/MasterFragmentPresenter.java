@@ -6,6 +6,7 @@ Created by Helm  16/11/14.
 package com.helm.portfolio.ui.presenters;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.helm.portfolio.ui.views.MasterFragmentView;
 import com.helm.portfolio.utils.AppsXmlParser;
 import org.lucasr.twowayview.ItemClickSupport;
 import org.lucasr.twowayview.ItemSelectionSupport;
+import org.lucasr.twowayview.widget.DividerItemDecoration;
 
 import javax.inject.Inject;
 
@@ -45,6 +47,8 @@ public class MasterFragmentPresenter {
         recyclerView.setAdapter(adapter);
         itemSelectionSupport = ItemSelectionSupport.addTo(recyclerView);
         itemSelectionSupport.setChoiceMode(ItemSelectionSupport.ChoiceMode.SINGLE);
+        final Drawable divider = context.getResources().getDrawable(R.drawable.list_divider);
+        recyclerView.addItemDecoration(new DividerItemDecoration(divider));
         final ItemClickSupport itemClickSupport = ItemClickSupport.addTo(recyclerView);
         itemClickSupport.setOnItemClickListener( new ItemClickSupport.OnItemClickListener() {
             @Override

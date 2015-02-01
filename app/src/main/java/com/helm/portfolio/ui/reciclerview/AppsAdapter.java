@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.helm.portfolio.R;
 import com.helm.portfolio.ui.models.App;
@@ -32,7 +33,7 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.ViewHolder> {
         public TextView title;
         public TextView status;
         public ImageView icon;
-        public ViewHolder(CardView itemView) {
+        public ViewHolder(RelativeLayout itemView) {
             super(itemView);
 
            title = ((TextView) itemView.findViewById(R.id.app_title));
@@ -53,7 +54,7 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.master_fragment_rv_item, null);
-        return new ViewHolder(((CardView) v));
+        return new ViewHolder(((RelativeLayout) v));
     }
 
     @Override

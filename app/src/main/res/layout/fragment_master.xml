@@ -24,6 +24,8 @@
             android:layout_alignParentRight="true"
             android:layout_margin="16dp"
             android:src="@drawable/ic_mail_white_24dp"
-            fab:fab_colorNormal="@color/material_abmer_A700"
+            fab:fab_colorNormal="@color/material_amber_A700"
+            fab:fab_colorPressed="@color/material_amber_A700"
+            fab:fab_colorRipple="@color/material_amber_A800"
             />
 </RelativeLayout>

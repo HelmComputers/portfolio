@@ -24,7 +24,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 
-public class DetailsFragment extends BaseFragment implements DetailsFragmentView{
+public class  DetailsFragment extends BaseFragment implements DetailsFragmentView{
 
     public static String DETAILS_POSITION = "DETAILS_POSITION";
     public static String DETAILS_APP = "DETAILS_APP";
