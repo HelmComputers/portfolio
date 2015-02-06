@@ -28,7 +28,6 @@ proguard/
 .gradle/
 #AÃ±adido a mano
 gradle/
-gradle*
 out
 
 # Eclipse
@@ -58,3 +57,5 @@ gdbserver
 gdb.setup
 
 #############################
+
+app/src/main/res/values/com_crashlytics_export_strings.xml

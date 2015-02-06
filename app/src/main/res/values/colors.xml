@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="material_light_blue_500">#03A9F4</color>
+    <color name="material_light_blue_700">#0288D1</color>
+    <color name="material_amber_A700">#FFAB00</color>
+    <color name="material_amber_A800">#FF8F00</color>
+
+
+</resources>

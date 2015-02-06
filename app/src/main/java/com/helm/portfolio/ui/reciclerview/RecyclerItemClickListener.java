@@ -5,7 +5,9 @@ Created by Helm  16/11/14.
 
 package com.helm.portfolio.ui.reciclerview;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -25,11 +27,12 @@ public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListen
         mListener = listener;
         mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
             @Override public boolean onSingleTapUp(MotionEvent e) {
-                return true;
+                return false;
             }
         });
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override public boolean onInterceptTouchEvent(RecyclerView view, MotionEvent e) {
         View childView = view.findChildViewUnder(e.getX(), e.getY());
         if (childView != null && mListener != null && mGestureDetector.onTouchEvent(e)) {
@@ -37,6 +40,8 @@ public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListen
         }
         return false;
     }
+
+
 
     @Override public void onTouchEvent(RecyclerView view, MotionEvent motionEvent) { }
 }

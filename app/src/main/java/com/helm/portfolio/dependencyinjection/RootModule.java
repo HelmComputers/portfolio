@@ -16,7 +16,7 @@ import dagger.Provides;
         injects = {
                 HelmApplication.class,
                 MasterFragment.class,
-                DetailsFragment.class
+                DetailsFragment.class,
         },
         library = true
 )

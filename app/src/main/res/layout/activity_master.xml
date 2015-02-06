@@ -1,21 +1,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:layout_height="match_parent"
               android:layout_width="match_parent"
               android:orientation="vertical"
         >
-    <android.support.v7.widget.Toolbar
-      android:id="@+id/toolbar"
-      android:layout_height="wrap_content"
-      android:layout_width="match_parent"
-      android:minHeight="?attr/actionBarSize"
-      android:background="?attr/colorPrimary"
-    />
+
+    <include layout="@layout/toolbar"/>
+
     <FrameLayout
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:context=".MasterActivity"
-                android:id="@+id/master_activity_master_container">
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".MasterActivity"
+            android:id="@+id/master_activity_master_container">
 
     </FrameLayout>
 

@@ -9,5 +9,6 @@
     <string name="recycler_view_apps_status">Application status:</string>
     <string name="recycler_view_apps_os">Operating System:</string>
     <string name="helm_mail">mailto:info@helm.cat</string>
+    <string name="app_not_found">Please install an app in order to send mails</string>
 
 </resources>

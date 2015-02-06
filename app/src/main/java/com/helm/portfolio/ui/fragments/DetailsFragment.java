@@ -24,7 +24,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 
-public class DetailsFragment extends BaseFragment implements DetailsFragmentView{
+public class  DetailsFragment extends BaseFragment implements DetailsFragmentView{
 
     public static String DETAILS_POSITION = "DETAILS_POSITION";
     public static String DETAILS_APP = "DETAILS_APP";
@@ -41,8 +41,6 @@ public class DetailsFragment extends BaseFragment implements DetailsFragmentView
     TextView title;
     @InjectView(R.id.app_status)
     TextView status;
-    @InjectView(R.id.app_os)
-    TextView os;
     @InjectView(R.id.fragment_details_description)
     TextView description;
 
@@ -72,12 +70,10 @@ public class DetailsFragment extends BaseFragment implements DetailsFragmentView
     }
 
     private void setupApp(App app) {
-        status.setText(app.getStatus());
+        status.setText(app.getOs()+" "+app.getStatus());
         title.setText(app.getTitle());
-        os.setText(app.getOs());
         description.setText(app.getDescription());
         initializeRecyclerView(app.getPhotos(context));
-
     }
 
     private void initializeRecyclerView(List<Drawable> photos) {
