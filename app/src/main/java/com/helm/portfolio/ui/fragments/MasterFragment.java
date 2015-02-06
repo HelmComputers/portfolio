@@ -4,7 +4,6 @@ package com.helm.portfolio.ui.fragments;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,8 +19,6 @@ import com.helm.portfolio.ui.reciclerview.AppsAdapter;
 import com.helm.portfolio.ui.views.MasterFragmentView;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
-import org.lucasr.twowayview.ItemClickSupport;
-import org.lucasr.twowayview.widget.DividerItemDecoration;
 
 import javax.inject.Inject;
 
@@ -69,16 +66,16 @@ public class MasterFragment extends BaseFragment implements MasterFragmentView {
        // itemSelectionSupport.setChoiceMode(ItemSelectionSupport.ChoiceMode.SINGLE);
       //  itemSelectionSupport.
 
-        final Drawable divider = getActivity().getResources().getDrawable(R.drawable.list_divider);
-        recyclerView.addItemDecoration(new DividerItemDecoration(divider));
-        final ItemClickSupport itemClickSupport = ItemClickSupport.addTo(recyclerView);
+        //final Drawable divider = getActivity().getResources().getDrawable(R.drawable.list_divider);
+        //recyclerView.addItemDecoration(new DividerItemDecoration(divider));
+        //final ItemClickSupport itemClickSupport = ItemClickSupport.addTo(recyclerView);
 
-        itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-            @Override
-            public void onItemClick(RecyclerView recyclerView, final View view, int i, long l) {
-                masterFragmentPresenter.onListItemClicked(i);
-            }
-        });
+        //itemClickSupport.setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+          //  @Override
+        //    public void onItemClick(RecyclerView recyclerView, final View view, int i, long l) {
+          //      masterFragmentPresenter.onListItemClicked(i);
+        //    }
+       /// });
     }
 
     @Override

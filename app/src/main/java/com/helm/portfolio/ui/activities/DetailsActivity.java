@@ -23,7 +23,6 @@ public class DetailsActivity extends BaseActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setSupportActionBar(toolbar);
-        toolbar.
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE &&
                 getResources().getBoolean(R.bool.isTablet)){
             finish();

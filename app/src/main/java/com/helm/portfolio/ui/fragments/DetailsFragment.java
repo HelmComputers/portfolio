@@ -74,7 +74,6 @@ public class  DetailsFragment extends BaseFragment implements DetailsFragmentVie
         title.setText(app.getTitle());
         description.setText(app.getDescription());
         initializeRecyclerView(app.getPhotos(context));
-
     }
 
     private void initializeRecyclerView(List<Drawable> photos) {
