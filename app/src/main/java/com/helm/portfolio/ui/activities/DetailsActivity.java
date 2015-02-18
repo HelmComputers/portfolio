@@ -9,20 +9,18 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.Toolbar;
-import butterknife.InjectView;
 import com.helm.portfolio.R;
 import com.helm.portfolio.ui.fragments.BaseFragment;
 import com.helm.portfolio.ui.fragments.DetailsFragment;
 import com.helm.portfolio.ui.models.App;
 
 public class DetailsActivity extends BaseActivity{
-    @InjectView(R.id.toolbar)
-    Toolbar toolbar;
+   // @InjectView(R.id.toolbar)
+ //   Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setSupportActionBar(toolbar);
+   //     setSupportActionBar(toolbar);
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE &&
                 getResources().getBoolean(R.bool.isTablet)){
             finish();
@@ -49,4 +47,7 @@ public class DetailsActivity extends BaseActivity{
     }
 
 
+    //public Toolbar getToolbar() {
+     //   return toolbar;
+   // }
 }
